@@ -1,4 +1,5 @@
 import { Message } from 'discord.js';
+import { help } from './help';
 import { vote } from './vote';
 
 export const commands = {
@@ -9,4 +10,5 @@ export const commands = {
   gustavin: () => 'Vou ter que sair aqui, tenho muita coisa pra fazer ',
   gabriel: () => 'Ah, eu acho barato, porque uma caixa de cerveja é 35 reais',
   vote: (message: Message) => vote(message),
+  help: () => help(),
 };

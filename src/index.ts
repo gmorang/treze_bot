@@ -36,7 +36,7 @@ client.on('message', (message) => {
 
   const reply = commands[command] || (() => 'Não sei nada sobre esse idiota');
 
-  message.reply(reply(message));
+  message.channel.send(reply(message));
 });
 
 client.login(token);
