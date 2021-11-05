@@ -5,5 +5,5 @@ export const vote = (message: Message) => {
   const arr = content.split(',');
   const item = arr[Math.floor(Math.random() * arr.length)];
 
-  return item;
+  return `A opção escolhida é ${item}`;
 };
