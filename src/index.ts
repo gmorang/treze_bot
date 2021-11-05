@@ -1,4 +1,5 @@
 import { Client, Intents } from 'discord.js';
+import { commands } from './commands';
 
 const env = process.env || {};
 
@@ -13,7 +14,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
   ],
   presence: {
-    status: 'dnd',
+    status: 'online',
   },
 });
 
@@ -33,9 +34,9 @@ client.on('message', (message) => {
   const args = commandBody.split(' ');
   const command = args.shift().toLowerCase();
 
-  if (command === 'rodrigo') {
-    message.reply('Drigoro');
-  }
+  const reply = commands[command] || (() => 'Não sei nada sobre esse idiota');
+
+  message.reply(reply(message));
 });
 
 client.login(token);
