@@ -25,7 +25,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`);
 });
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
   if (message.author.bot) return null;
   const isPrefix = message.content.startsWith(prefix);
 
@@ -34,8 +34,8 @@ client.on('message', (message) => {
   const args = commandBody.split(' ');
   const command = args.shift().toLowerCase();
 
-  const reply = commands[command] || (() => 'Não sei nada sobre esse idiota');
-
+  const reply = await commands[command] || (() => 'Não sei nada sobre esse idiota');
+  
   message.channel.send(reply(message));
 });
 
