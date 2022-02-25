@@ -1,4 +1,4 @@
-import { Client, Intents } from 'discord.js';
+import { Client, Intents, InteractionReplyOptions } from 'discord.js';
 import { commands } from './commands';
 
 const env = process.env || {};
@@ -21,11 +21,14 @@ const client = new Client({
 const token = env.BOT_TOKEN;
 const prefix = '!';
 
+const interactionReply: InteractionReplyOptions = {fetchReply: true};
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`);
 });
 
-client.on('message', async (message) => {
+
+client.on('message', async message => {
   if (message.author.bot) return null;
   const isPrefix = message.content.startsWith(prefix);
 
@@ -35,8 +38,10 @@ client.on('message', async (message) => {
   const command = args.shift().toLowerCase();
 
   const reply = await commands[command] || (() => 'Não sei nada sobre esse idiota');
+
+  console.log(reply);
   
-  message.channel.send(reply(message));
+  message.channel.send(await reply(message));
 });
 
 client.login(token);
