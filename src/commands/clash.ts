@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Clan } from "../interfaces/clan";
 import { ClanMember } from "../interfaces/clan-member";
+import { War } from "../interfaces/war";
 
 const env = process.env || {};
 
@@ -9,7 +10,6 @@ const apiToken = env.CLASH_TOKEN;
 const headers = {
   Authorization: `Bearer ${apiToken}`
 }
-
 
 export const clan = async () => {
   // TODO: CREATE RESPONSE INTERFACE
@@ -35,15 +35,17 @@ export const war = async () => {
     headers: headers,
   });
 
-  console.log('DATA -----');
-  console.log(response.data.items);
-
   if (response.data.items === []) return `Ainda não temos informações de guerra! 🤯`;
 
-  // const clan: Clan = response.data.clan;
-  // const opponent = response.data.opponent.name
+  const data: Array<War> = response.data.items;
+  const clan: Clan = data[0].clan;
+
+  const { name } = clan;
+  const opponent = data[0].opponent.name;
+  const result = data[0].result !== 'lose' ? 'Win!! 🍾 🍻' : 'Lose 🤕'
 
   return `
-  GUERRA MONSTRA:
+  Last war 🏹 : ${name} x ${opponent}
+\n\nResult: ${result}
   `;
 }

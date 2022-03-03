@@ -21,7 +21,7 @@ const client = new Client({
 const token = env.BOT_TOKEN;
 const prefix = '!';
 
-const interactionReply: InteractionReplyOptions = {fetchReply: true};
+const interactionReply: InteractionReplyOptions = { fetchReply: true };
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`);
@@ -39,8 +39,6 @@ client.on('message', async message => {
 
   const reply = await commands[command] || (() => 'Não sei nada sobre esse idiota');
 
-  console.log(reply);
-  
   message.channel.send(await reply(message));
 });
 
