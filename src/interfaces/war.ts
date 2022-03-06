@@ -1,8 +1,8 @@
 import { Clan } from "./clan";
 
 export interface War {
-  result: String;
-  endTime: Date;
+  result: string;
+  endTime: string;
   teamSize: number;
   attacksPerMember: number;
   clan: Clan;
